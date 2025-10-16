@@ -1,147 +1,154 @@
 <?php
-require_once '../kingsen/conexao/conecta.php';
+require_once 'conexao/conecta.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- Bootstrap CSS -->
-    
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">    
+    <title>Kingsen</title>
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="../kingsen/css/style_front.css">
+    <link rel="stylesheet" href="../kingsen/css/style_front.css">
 
-    <title>Kingsen</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.icon.png">
+
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg ">
-        <a class="navbar-brand" href="index.html">
-            <img src="images/kingsen.pnj_page-0001.jpg"  height="120" alt="">
-          </a>
-        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link"  href="index.php">Home</a>
-                    <a class="nav-item nav-link" href="produtos.php">Produtos</a>
-                    <a class="nav-item nav-link" href="contato.php">Contato</a>
-                
-                </div>
-            </div>    
-            <form class="form-inline my-2 my-lg-0" style="margin-left: 370px;">
-                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
-        </div>
-    </nav>
 
-    <div class="mainpage-container">
-        <div class="container" style="margin-top: 10px;"> 
+    <?php include('navegacao.php'); ?>
+
+    <div class="main-content">
+        <!-- FILTRO -->
+        <aside class="filtro">
+            <h3>Filtrar por</h3>
+
+            <!-- FILTRO POR CATEGORIA -->
+            <h4>Categorias</h4>
+            <ul>
                 <?php
-            $sql = "SELECT p.id_produto, p.foto, p.nome, p.preco_venda FROM produto p where 1=1";
+                $sql_categoria = "SELECT id_categoria, nome_categoria FROM categoria WHERE status = 1;";
+                $query_categoria = mysqli_query($conexao, $sql_categoria);
+                foreach ($query_categoria as $categoria) {
+                    echo '<li><a href="categoria.php?id_categoria=' . $categoria['id_categoria'] . '">' . $categoria['nome_categoria'] . '</a></li>';
+                }
+                ?>
+            </ul>
 
-            $query = mysqli_query($conexao, $sql);
-            if (mysqli_num_rows($query) > 0) {  
+            <!-- FILTRO POR MARCA -->
+            <h4>Marcas</h4>
+            <ul>
+                <?php
+                $sql_marca = "SELECT id_marca, nome_marca FROM marca WHERE status = 1;";
+                $query_marca = mysqli_query($conexao, $sql_marca);
+                foreach ($query_marca as $marca) {
+                    echo '<li><a href="marca.php?id_marca=' . $marca['id_marca'] . '">' . $marca['nome_marca'] . '</a></li>';
+                }
+                ?>
+            </ul>
+        </aside>
 
-            ?>
+        <!-- CONTEÚDO DE PRODUTOS -->
+        <main class="produtos">
+            <div class="container mt-3">
+                <?php
+                $sql_cont = "SELECT id_produto FROM produto";
+                $query_count = mysqli_query($conexao, $sql_cont);
+                $quantidade = mysqli_num_rows($query_count);
 
-                <div class="row justify-content-center text-center">
-                    <div class="card-group">
+                $paginaAtual = isset($_GET['pagina']) && !empty($_GET['pagina']) ? $_GET['pagina'] : 1;
+                $url = "?pagina=";
+                $paginaQtdd = 8;
+                $valorInicial = ($paginaAtual * $paginaQtdd) - $paginaQtdd;
+                $paginaFinal = ceil($quantidade / $paginaQtdd);
+                $paginaInicial = 1;
+                $paginaProxima = $paginaAtual + 1;
+                $paginaAnterior = $paginaAtual - 1;
 
-                        <?php
-                        foreach ($query as $produto) {
-                        ?>
-                            <div class="col-lg-3">
-                                <div class="card m-2 mt-3" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                $sql = "SELECT * FROM produto p WHERE p.status = 1 LIMIT $valorInicial, $paginaQtdd";
+                $query = mysqli_query($conexao, $sql);
+
+                if (mysqli_num_rows($query) > 0) {
+                ?>
+                    <div class="row justify-content-center text-center" id="produtos">
+                        <?php foreach ($query as $produto) { ?>
+                            <div class="col-lg-3" >
+                                <div class="card mt-3">
                                     <div class="div-img">
                                         <?php
+                                        if ($produto['status_promocao'] == 1) {
+                                            echo '<span class="badge badge-success ml-6">Promoção</span>';
+                                        }
                                         if ($produto['foto'] != '') {
-                                            echo '<img src="images/' . $produto['foto'] . '" alt="" class="card-img-top"/>';
+                                            echo '<img src="images/' . $produto['foto'] . '" alt= "' . $produto['nome'] . '" class="card-img"/>';
                                         } else {
-                                            echo '<img src="assets/img/placeholder-produto.png" alt="" class="card-img-top"/>';
+                                            echo '<img src="assets/img/placeholder-produto.png" alt="' . $produto['nome'] . '" class="card-img"/>';
                                         }
                                         ?>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title" style="color: black;"><?php echo $produto['nome'] ?></h5>
-                                        <p class="card-text" style="color: rgb(0, 0, 0);">R$ <?php echo $produto['preco_venda'] ?></p>
+                                        <h5 class="card-title mt-5" style="color: black;"><?php echo $produto['nome'] ?></h5>
+                                        <?php
+                                        if ($produto['status_promocao'] == 1) {
+                                            echo '<s class="mr-2"> R$ ' . number_format($produto['preco_venda'], 2, ',', '.') . '</s>';
+                                            echo '<p style="display: inline-block;"> R$ ' . number_format($produto['preco_promocao'], 2, ',', '.') . '</p>';
+                                        } else {
+                                            echo '<p> R$ ' .  number_format($produto['preco_venda'], 2, ',', '.') . '</p>';
+                                        }
+                                        ?>
                                         <a href="comprar.php?id_produto=<?php echo $produto['id_produto'] ?>" class="btn btn-primary"
-                                            style="color: rgb(255, 255, 255); background-color: rgb(124, 19, 19); border: none;">Comprar</a>
+                                            style="background-color: rgb(124, 19, 19); border: none;">Comprar</a>
                                     </div>
                                 </div>
                             </div>
                         <?php } ?>
-                    </div>
-                </div>
 
-            <?php
-            } else {
-                echo '<h5>Nenhum produto encontrado!</h5>';
-            }
-            ?>
-        </div>
+                        <div class="col-12">
+                            <nav aria-label="paginacao">
+                                <ul class="pagination justify-content-center mt-4">
+                                    <?php if ($paginaAtual != $paginaInicial) { ?>
+                                        <li class="page-item"><a class="page-link" href="<?php echo $url . $paginaInicial ?>">Início</a></li>
+                                    <?php } ?>
+                                    <?php if ($paginaAtual >= 2) { ?>
+                                        <li class="page-item"><a class="page-link" href="<?php echo $url . $paginaAnterior ?>">&laquo;</a></li>
+                                    <?php } ?>
+                                    <?php if ($paginaAtual != $paginaFinal) { ?>
+                                        <li class="page-item"><a class="page-link" href="<?php echo $url . $paginaProxima ?>">&raquo;</a></li>
+                                        <li class="page-item"><a class="page-link" href="<?php echo $url . $paginaFinal ?>">Final</a></li>
+                                    <?php } ?>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                <?php
+                } else {
+                    echo '<h5>Nenhum produto encontrado!</h5>';
+                }
+                ?>
+            </div>
+        </main>
     </div>
 
-        <hr style="border-bottom:2px solid #000000ff">
+    <div class="linha" style="background-color: black;height: 0.2rem"></div>
 
-    <section style="color: white;" class="mt-5 mb-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-3">
-                    <h2>Horário de atendimento</h2>
-                    <br>
-                    <p>Segunda a Sexta: 8h00 às 18h00</p>
-                </div>
+    <?php
+    #Início MENU
+    include('finalPag.php');
+    #Final MENU
+    ?>
 
-                <div class="col-3" style="margin-left: 130px;">
-                    <h2>Redes Sociais</h2>
-                    <br>
-                    <a href="https://www.instagram.com/">
-                        <img src="images/Instagram_logo.png" alt="instagram" style="height: 30px; margin-right:20px; margin-left: 45px;">
-                    </a>
-                    <a href="https://x.com/?lang=pt">
-                        <img src="images/x-logo.png" alt="instagram" style="height: 30px;margin-right:20px">
-                    </a>
-                    <a href="https://www.facebook.com/?locale=pt_BR">
-                        <img src="images/facebook_logo.png" alt="instagram" style="height: 30px;margin-right:20px">
-                    </a>
-
-                    </div>
-
-                    <div class="col-3" style="margin-left: 120px;">
-                        <h2>Links Rápidos</h2>
-
-                        <a style="color: white; font-size: 20px; font-family: Rubik, sans-serif;" class="nav-link" href="index.php">Home</a>
-
-                        <a style="color: white; font-size: 20px; font-family: Rubik, sans-serif" class="nav-link" href="produtos.php">Produtos</a>
-
-                        <a style="color: white;font-size: 20px;font-family: Rubik, sans-serif" class="nav-link" href="contato.php">Contato</a>
-
-                        <div class="col-3"></div>
-                    </div>
-                </div>
-    </section>
-
-    <footer class="rodape py-3 text-white">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    &copy; Copyright 2025 - Kigsen - Todos os diretos reservados.<br>
-                    Desenvolvimento por
-                    <a href="#" target="_blank" class="botão" style="color: rgb(155, 10, 10);">Aphehlin</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -18,7 +18,7 @@ $url = "http://" .$_SERVER['HTTP_HOST']. "/" .$caminho[1] . "/".$caminho[2]. "/"
     
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo $url?>admin/admin.php">
+        <a class="nav-link" href="<?php echo $url?>admin.php">
           <i class="bi bi-house-door-fill"></i>
           Início
         </a>

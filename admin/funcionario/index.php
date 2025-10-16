@@ -33,7 +33,7 @@ if (!isset($_SESSION)) {
   <link rel="stylesheet" href="../../css/style.css">
 
   <!-- FAVICON -->
-  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+<link rel="icon" type="image/x-icon" href="../../assets/img/favicon.icon.png">
 </head>
 
 <body>

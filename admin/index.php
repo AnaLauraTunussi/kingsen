@@ -19,24 +19,31 @@ if (!isset($_SESSION)) {
   <!-- BOOTSTRAP CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
   <!-- CUSTOMIZAÇÃO DO TEMPLATE -->
   <link href="../css/signin.css" rel="stylesheet">
 
-  <!-- FAVICON -->
   <link rel="icon" type="image/x-icon" href="../assets/img/favicon.icon.png">
+
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="text-center">
+<body class="text-center" style="background-color: black;">
+
 
   <main class="form-signin">
+   
+    <img src="../images/kingsen.pnj_page-0001.jpg" alt="kingsen" class="rounded mx-auto d-block" style="height: 200px; width: 200px">
     <form action="login.php" method="POST">
-      <h2 class="h3 mb-3">Faça seu Login</h2>
+      <h2 id="login" class="h3 mb-3">Faça seu Login</h2>
 
       <input type="text" class="form-control mb-2" name="usuario" placeholder="Usuário">
 
-      <input type="password" class="form-control" name="senha" placeholder="Senha">
+      <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
+      
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+      <button id="entrar" class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
 
     </form>
 
@@ -109,6 +116,17 @@ if (!isset($_SESSION)) {
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script>
+    function mostrarSenha(){
+      var inputPass = document.getElementById('senha');
+      var btnShowPass = document.getElementById('btn-senha');
+
+      if(inputPass.type === 'password'){
+        inputPass.setAttribute('type', 'text');
+        btnShowPass.classList.replace('bi bi-eye','bi bi-eye-slash')
+      }
+    }
+  </script>    
 </body>
 
 </html>

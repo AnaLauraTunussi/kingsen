@@ -28,7 +28,7 @@ include_once '../usuario_comum.php';
     <link href="../../css/dashboard.css" rel="stylesheet">
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+<link rel="icon" type="image/x-icon" href="../../assets/img/favicon.icon.png">
 
     <link rel="stylesheet" href="../../css/style.css">
 </head>

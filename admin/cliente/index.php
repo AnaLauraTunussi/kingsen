@@ -33,7 +33,7 @@ if (!isset($_SESSION)) {
   <link rel="stylesheet" href="../../css/style.css">
 
   <!-- FAVICON -->
-  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.icon.png">
 </head>
 
 <body>
@@ -55,7 +55,7 @@ if (!isset($_SESSION)) {
       <main class="ml-auto col-lg-10 px-md-4">
 
         <div class="container mt-5">
-           <?php include '../mensagem.php' ?>
+          <?php include '../mensagem.php' ?>
           <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
               <h4 class="m-0">Cliente</h4>

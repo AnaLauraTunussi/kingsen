@@ -34,7 +34,7 @@ if (!isset($_SESSION)) {
     <link href="../../css/dashboard.css" rel="stylesheet">
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+<link rel="icon" type="image/x-icon" href="../../assets/img/favicon.icon.png">
 
     <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -138,7 +138,7 @@ if (!isset($_SESSION)) {
 
                                         <div class="col-6">
                                             <label for="obaCargo">Descrição: </label>
-                                            <textarea name="descricao" row="5" maxlength="100" class="form-control" require></textarea><br>
+                                            <textarea name="descricao" style="height: 39px;" maxlength="100" class="form-control" require></textarea><br>
                                         </div>
                                         <!--  -->
                                         <div class="col-12">
@@ -176,7 +176,7 @@ if (!isset($_SESSION)) {
 
                                     </div>
                                 </div>
-                                <input value="cadastrar" type="submit" class="btn btn-primary btn-md">
+                                <input value="cadastrar" type="submit" class="btn btn-primary btn-sm">
                                 <input type="hidden" value="cadastrar_produto" name="cadastrar_produto">
                             </form>
                         </div>

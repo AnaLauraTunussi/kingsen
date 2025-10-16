@@ -30,7 +30,7 @@ include_once '../usuario_comum.php';
     <link href="../../css/dashboard.css" rel="stylesheet">
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+<link rel="icon" type="image/x-icon" href="../../assets/img/favicon.icon.png">
 
     <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -74,13 +74,16 @@ include_once '../usuario_comum.php';
                             <div class="card-body">
                                 <form action="acoes.php" method="post" enctype="multipart/form-data">
                                     <div class="col-12 mb-2 text-center">
-                                        <?php if($foto != ''){ ?>
-                                        <input type="image" src="../../assets/img/" id="preview-foto" name="foto" alt="foto" width="200" value="<?php echo $produto['foto'] ?>" height="200"><br>
-                                        <?php }else { ?>
-                                        <input type="image" src="../../assets/img/placeholder-produto.jpg" id="preview-foto" name="foto" alt="foto" width="200" height="200"><br>    
-                                        <?php } ?>    
+                                        <input type="image" src= "<?php 
+                                            if($produto['foto'] != ""){
+                                                echo '../../images/' . $produto['foto'];
+                                            }else{
+                                                echo'../../assets/img/placeholder-produto.jpg';
+                                            }
+                                        ?>" id="preview-foto" name="foto" alt="foto" width="200" height="200"><br>
                                         <label for="image"><strong class="text-danger">*</strong>Foto do Produto</label><br>
-                                        <input type="file" id="foto_produto" name="foto" accept="image/*"  onchange="previewImagem(event)">
+                                        <input type="file" id="foto_produto" name="foto" accept="image/*" onchange="previewImagem(event)">
+
                                     </div>
 
                                     <div class="form-group">
@@ -148,7 +151,7 @@ include_once '../usuario_comum.php';
 
                                             <div class="col-6">
                                                 <label for="obaCargo">Descrição: </label>
-                                                <textarea name="descricao" row="5" maxlength="100" class="form-control" require><?php echo $produto['descricao'] ?></textarea><br>
+                                                <textarea name="descricao" style="height: 39px;" maxlength="100" class="form-control" require><?php echo $produto['descricao'] ?></textarea><br>
                                             </div>
                                             <!--  -->
                                             <div class="col-12">

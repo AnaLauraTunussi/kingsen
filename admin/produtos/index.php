@@ -34,7 +34,7 @@ include_once '../usuario_comum.php';
   <link rel="stylesheet" href="../../css/style.css">
 
   <!-- FAVICON -->
-  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+ <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.icon.png">
 
   <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -166,6 +166,7 @@ include_once '../usuario_comum.php';
       })
     })
   </script>
+  
 </body>
 
 </html>

@@ -1,30 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
 
-nav {
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar {
-    background-color: black;
-    position: fixed;
-}
-
-.nav-link {
-    color: #ce1717;
-    font-size: 40px;
-}
-
-a:hover {
-    color: rgb(204, 202, 202);
-}
-
 body {
     font-family: "Pirata One", system-ui;
     font-weight: 400;
     font-style: normal;
-    background-color: #2f0505
+    background-color: #2f0505;
+    margin: 0;
+    padding: 0;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#txt-index {
+    max-width: 40%;
+    margin-left: 8rem;
+}
+
+#marca{
+    margin-top: 10rem;
 }
 
 h2,
@@ -51,13 +50,14 @@ h1 {
     background: white;
 }
 
-.mainpage-container { 
-    padding: 150px 0 0px;
-    min-width: 100%;
+.main-content {
+    flex: 1;
+    display: flex;
+    padding: 1rem;
 }
 
 .jumbotron {
-    background: linear-gradient(10deg, #740c0c, #312d31);
+    background: linear-gradient(10deg, #740c0c, #000000);
 }
 
 .parallax {
@@ -67,12 +67,20 @@ h1 {
     background-blend-mode: overlay;
 }
 
+.container-gerald {
+    background-color: #000;
+    margin-top: 10rem;
+    ;
+}
+
 .btn {
     border-radius: 20px;
 }
 
 .rodape {
-    background-color: rgb(0, 0, 0);
+    background-color: #000;
+    text-align: center;
+    padding: 1rem 0;
 }
 
 .botão {
@@ -138,7 +146,7 @@ textarea.form-control {
     background: red;
 }
 
-#product{
+#product {
     background-color: white;
     width: 170vh;
     justify-content: center;
@@ -147,28 +155,352 @@ textarea.form-control {
     margin: 0 auto;
 }
 
-#payment{
+#payment {
     justify-content: center;
     text-align: center;
     align-items: center;
     margin-left: 140px;
 }
 
-th, td{
-     font-family: "Gill Sans Extrabold", sans-serif
+th,
+td {
+    font-family: "Gill Sans Extrabold", sans-serif
 }
 
-#name{
+#name {
     font-family: "Pirata One", system-ui;
 }
 
-#about{
+#about {
     text-align: center;
     align-items: center;
     justify-content: center;
-}    
+}
 
-#map iframe{
+#map iframe {
     width: 100%;
     height: 250px;
+}
+
+.page-link {
+    line-height: 1.25;
+    color: #f00;
+}
+
+.page-link:hover {
+    color: #000000;
+}
+
+#sobre,
+.text-muted {
+    color: #ffffff !important;
+}
+
+.header {
+    background: #000000;
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    margin-left: 10rem;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+
+@media (max-width: 768px) {
+
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav ul {
+        gap: 1rem;
+    }
+
+}
+
+.btn-secondary {
+    color: #ce1616;
+    background-color: transparent;
+    border-color: transparent;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.btn-secondary:hover {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    font-size: 2rem;
+}
+
+.nav li {
+    margin-top: 0.43rem;
+    font-size: 2rem;
+
+}
+
+.nav a {
+    text-decoration: none;
+    color: #ce1616;
+}
+
+.nav a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 20px #000;
+    border: 0.5px solid #000;
+    display: none !important;
+}
+
+.dropdown-menu a {
+    display: block;
+    margin: 2px 10px 10px 10px;
+    color: black;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block !important;
+}
+
+.dropdown-menu a:hover {
+    color: red;
+}
+
+.card {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    height: 27rem;
+}
+
+.relacionados {
+    height: 50rem;
+}
+
+.textoRelacionados {
+    color: white;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.filtro {
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    width: 250px;
+    border-right: 1px solid #ddd;
+    margin-top: 10rem;
+    height: auto;
+}
+
+.filtro h3,
+.filtro h4 {
+    margin: 10px 0 5px;
+    font-family: Arial, sans-serif;
+}
+
+.filtro ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.filtro li {
+    margin-bottom: 6px;
+}
+
+.filtro a {
+    text-decoration: none;
+    color: #333;
+}
+
+.filtro a:hover {
+    color: #a30b00;
+}
+
+.produtos {
+    flex: 1;
+    margin-top: 10rem;
+}
+
+
+.form-inline {
+    margin-right: 10rem;
+}
+
+#sociais {
+    margin-left: 8.12rem;
+}
+
+#insta {
+    height: 1.8rem;
+    margin-right: 1.25rem;
+    margin-left: 2.81rem;
+}
+
+#x {
+    height: 1.8rem;
+    margin-right: 1.25rem
+}
+
+#facebook {
+    height: 1.8rem;
+    margin-right: 1.25rem;
+}
+
+#contato h2 {
+    margin-top: 7.5rem;
+}
+
+#fomas-contato img {
+    height: 6.25rem;
+}
+
+@media only screen and (max-width: 418px) {
+    nav a {
+        font-size: 1.5rem;
+    }
+
+    nav ul {
+        margin-right: 3rem;
+    }
+
+    .logo img {
+        margin-left: 0;
+        height: 3rem;
+    }
+
+    .display-1 {
+        font-size: 3rem;
+        margin-top: 10rem;
+        width: 23rem;
+        text-align: center;
+    }
+
+    .lead {
+        width: 23rem;
+    }
+
+    #conheca {
+        margin-left: 2rem;
+    }
+
+    #txt-index {
+        max-width: 40%;
+        margin-left: 0rem;
+    }
+
+    .form-inline {
+        margin-right: 0;
+    }
+
+    #info h2 {
+        font-size: 1.2rem;
+    }
+
+    #sociais {
+        margin-left: 2rem;
+    }
+
+    #insta {
+        margin-right: 1rem;
+    }
+
+    #x {
+        margin-left: 2.7rem;
+    }
+
+    #facebook {
+        margin-left: 2.7rem;
+    }
+
+    #sociais h2 {
+        margin-left: 1rem;
+    }
+
+    #contato h2 {
+        margin-top: 16rem;
+    }
+
+    #formas-contato {
+        width: 23rem;
+        height: 22rem;
+    }
+
+    #formas-contato img {
+        height: 2rem !important;
+    }
+
+    #formas-contato h4,
+    p {
+        font-size: 1rem;
+    }
+
+    #formas-contato .card-info {
+        height: 2rem;
+        width: 2rem;
+        margin-bottom: 2rem;
+
+    }
+
+    #formas-contato p {
+        display: flex;
+    }
+
+
+    .filtro {
+        width: 9rem;
+        height: 100%;
+        margin-top: 19rem;
+
+    }
+
+    .filtro h3 {
+        font-size: 1.3rem;
+    }
+
+    .filtro h4 {
+        font-size: 1rem;
+    }
+
+    #produtos {
+        margin-top: 10rem;
+    }
+
+    #produtos .card {
+        height: 28rem;
+        width: 12rem;
+    }
+
+    #info {
+        z-index: 1000;
+        background-color: #2f0505;
+    }
+
+
+
 }
